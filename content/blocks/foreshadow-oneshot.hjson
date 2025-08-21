@@ -13,7 +13,6 @@ requirements: [
 
 consumes: {
   power: 600
-  coolant: 0.1        # <- fixed
 }
 
 ammoPerShot: 5
