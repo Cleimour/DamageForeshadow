@@ -13,7 +13,7 @@ requirements: [
 
 consumes: {
   power: 600
-  coolant: liquid: cryofluid, amount: 0.1, optional: true
+  coolant: 0.1        # <- fixed
 }
 
 ammoPerShot: 5
