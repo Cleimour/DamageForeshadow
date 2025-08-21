@@ -5,22 +5,26 @@ description: "Foreshadow clone that deals 999,999,999 damage per shot."
 category: turret
 research: foreshadow
 
-# ----- visuals / icon behavior -----
+# ----- visuals / base -----
 squareSprite: false
 outlineIcon: false
 outlineColor: 36363Cff
 heatColor: ff7f31
-drawer: {
-  type: drawTurret
-  # draws the generic base by size: for size:4 this resolves to region "block-4"
-  basePrefix: block-
-}
+drawer: { type: drawTurret, basePrefix: block- 
+}   # auto-uses block-4 for size:4
 
 # ----- body -----
 size: 4
 health: 2400
 
-# ----- movement / targeting -----
+# ----- power & cooling -----
+hasPower: true
+consumes: { power: 600 }                            # same as vanilla
+# If your build supports it and you want faster cycling, you can add:
+# coolantMultiplier: 0.5
+# coolant: { amount: 0.1, optional: true }
+
+# ----- handling / targeting -----
 rotate: true
 rotateSpeed: 5
 shootCone: 0.3
@@ -30,23 +34,14 @@ targetGround: true
 targetInterval: 18
 
 # ----- timing / feel -----
-reload: 180          # ~3 seconds between shots
+range: 520
+reload: 180
 recoil: 3
 cooldownTime: 90
 shootY: 7.5
 shootSound: shootSmite
 
-# ----- power (keep coolant out for mobile compatibility) -----
-hasPower: true
-consumes: { power: 600 }
-# If your build supports it and you want cooling, uncomment the next two lines:
-# coolantMultiplier: 0.5
-# coolant: { amount: 0.1, optional: true }
-
-# ----- range -----
-range: 520
-
-# ----- the beam (PowerTurret uses shootType, not ammoTypes) -----
+# ----- rail beam (PowerTurret uses shootType) -----
 shootType: {
   type: RailBulletType
   damage: 999999999
@@ -54,14 +49,13 @@ shootType: {
   pierce: true
   pierceCap: 999
   buildingDamageMultiplier: 0.2
-  maxDamageFraction: -1   # disable %HP cap so it truly one-shots
-  # simple effects; optional cosmetics:
+  maxDamageFraction: -1     # disable %HP cap so it truly one-shots
   shootEffect: shootBigSmoke2
   hitEffect: hitBulletBig
   smokeEffect: none
 }
 
-# ----- build cost -----
+# ----- build cost (kept vanilla-ish) -----
 requirements: [
   copper/1000
   metaglass/600
