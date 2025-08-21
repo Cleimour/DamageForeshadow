@@ -1,7 +1,7 @@
 ﻿type: PowerTurret
 name: foreshadow-oneshot
 displayName: "Foreshadow (One-Shot)"
-description: "A Foreshadow variant tuned to 999,999,999 damage per shot."
+description: "Foreshadow clone that deals 999,999,999 damage."
 category: turret
 research: foreshadow
 
@@ -11,25 +11,30 @@ requirements: [
   copper/1000, metaglass/600, silicon/600, phase-fabric/200, surge-alloy/300
 ]
 
+# make sure it's a powered turret and can rotate
+hasPower: true
+rotate: true
+rotateSpeed: 5
+
+# power use (keep it simple on mobile)
+consumes: { power: 600 }
+
+# core turret behavior
 range: 520
 reloadTime: 180
 inaccuracy: 0
-rotateSpeed: 5
+recoil: 3
+cooldownTime: 90
+shootY: 7.5
 targetAir: true
 targetGround: true
 
-consumes: {
-  power: 600
-  # If this line errors on your mobile build, delete it:
-  coolant: { amount: 0.1, optional: true }
-}
-
-# Power turrets use shootType instead of ammoTypes
+# rail beam like the vanilla Foreshadow; no ammo mapping needed
 shootType: {
   type: RailBulletType
   damage: 999999999
   length: 520
   pierce: true
-  buildingDamageMultiplier: 0.2
   maxDamageFraction: -1
+  buildingDamageMultiplier: 0.2
 }
