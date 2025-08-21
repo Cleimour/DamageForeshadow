@@ -1,40 +1,71 @@
 ﻿type: PowerTurret
 name: foreshadow-oneshot
 displayName: "Foreshadow (One-Shot)"
-description: "Foreshadow clone that deals 999,999,999 damage."
+description: "Foreshadow clone that deals 999,999,999 damage per shot."
 category: turret
 research: foreshadow
 
+# ----- visuals / icon behavior -----
+squareSprite: false
+outlineIcon: false
+outlineColor: 36363Cff
+heatColor: ff7f31
+drawer: {
+  type: drawTurret
+  # draws the generic base by size: for size:4 this resolves to region "block-4"
+  basePrefix: block-
+}
+
+# ----- body -----
 size: 4
 health: 2400
-requirements: [
-  copper/1000, metaglass/600, silicon/600, phase-fabric/200, surge-alloy/300
-]
 
-# make sure it's a powered turret and can rotate
-hasPower: true
+# ----- movement / targeting -----
 rotate: true
 rotateSpeed: 5
-
-# power use (keep it simple on mobile)
-consumes: { power: 600 }
-
-# core turret behavior
-range: 520
-reloadTime: 180
+shootCone: 0.3
 inaccuracy: 0
+targetAir: true
+targetGround: true
+targetInterval: 18
+
+# ----- timing / feel -----
+reload: 180          # ~3 seconds between shots
 recoil: 3
 cooldownTime: 90
 shootY: 7.5
-targetAir: true
-targetGround: true
+shootSound: shootSmite
 
-# rail beam like the vanilla Foreshadow; no ammo mapping needed
+# ----- power (keep coolant out for mobile compatibility) -----
+hasPower: true
+consumes: { power: 600 }
+# If your build supports it and you want cooling, uncomment the next two lines:
+# coolantMultiplier: 0.5
+# coolant: { amount: 0.1, optional: true }
+
+# ----- range -----
+range: 520
+
+# ----- the beam (PowerTurret uses shootType, not ammoTypes) -----
 shootType: {
   type: RailBulletType
   damage: 999999999
   length: 520
   pierce: true
-  maxDamageFraction: -1
+  pierceCap: 999
   buildingDamageMultiplier: 0.2
+  maxDamageFraction: -1   # disable %HP cap so it truly one-shots
+  # simple effects; optional cosmetics:
+  shootEffect: shootBigSmoke2
+  hitEffect: hitBulletBig
+  smokeEffect: none
 }
+
+# ----- build cost -----
+requirements: [
+  copper/1000
+  metaglass/600
+  silicon/600
+  phase-fabric/200
+  surge-alloy/300
+]
